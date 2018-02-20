@@ -141,8 +141,8 @@ class _CorrClusBase(object):
         # Compute eigenvectors
         _, V = np.linalg.eig(np.cov(centered, rowvar=False))
         self.X_ = centered
-        cs = np.dot(centered, np.concatenate((V, -V), axis=1))
-        self.XV = cs
+        self.XV = np.dot(centered, V)
+        cs = np.concatenate((self.XV, -self.XV), axis=1)
         self.cord = np.argsort(-cs, axis=1)
         return self
     
@@ -184,6 +184,8 @@ class _CorrClusBase(object):
             The cluster tree in TIKZ format.
         """
         filtered_is = np.where(np.array(self.cluster_counts_) > min_size)[0]
+        if len(filtered_is) == 0:
+        	return "Empty tree"
         tree_clusters = [self.clusters_[i] for i in filtered_is]
         a = [['+' + str(j+1) if j < self.X_.shape[1] else 
               '-' + str(j - self.X_.shape[1] + 1) for j in i] for i in tree_clusters]
