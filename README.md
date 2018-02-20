@@ -1,4 +1,4 @@
-# IoT-Ticket Machine Learning Learning Library for Python: iotticketml
+# IoT-Ticket Machine Learning Library for Python: iotticketml
 
 IoT-Ticket Machine Learning library contains implementations of machine learning
 algorithms developed by IoT-Ticket experts. At the moment the library contains
